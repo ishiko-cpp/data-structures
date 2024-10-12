@@ -18,6 +18,7 @@ program IshikoDataStructuresTests : IshikoTestFrameworkCore, IshikoDataStructure
     {
         cxx-compiler-options = "-std=c++11";
         libs += IshikoTestFrameworkCore IshikoConfiguration IshikoXML IshikoFileSystem IshikoErrors;
+        libs += boost_filesystem;
     }
 
     headers
