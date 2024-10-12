@@ -1,4 +1,4 @@
-# Ishiko/C++ DataStructures
+# Ishiko/C++ Data Structures
 
 Code to handle differences between operating systems.
 
