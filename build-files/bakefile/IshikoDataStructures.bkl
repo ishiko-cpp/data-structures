@@ -36,6 +36,6 @@ library IshikoDataStructures
 
     sources
     {
-        ../src/RedBlackTree.cpp
+        ../../src/RedBlackTree.cpp
     }
 }

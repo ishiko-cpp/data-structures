@@ -60,8 +60,8 @@ all: ../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoDataStru
 	$(AR) rc $@ $(_builddir)IshikoDataStructures_RedBlackTree.o
 	$(RANLIB) $@
 
-$(_builddir)IshikoDataStructures_RedBlackTree.o: ../src/RedBlackTree.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../include/Ishiko/DataStructures -std=c++11 ../src/RedBlackTree.cpp
+$(_builddir)IshikoDataStructures_RedBlackTree.o: ../../src/RedBlackTree.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../include/Ishiko/DataStructures -std=c++11 ../../src/RedBlackTree.cpp
 
 clean:
 	rm -f $(_builddir)*.o
