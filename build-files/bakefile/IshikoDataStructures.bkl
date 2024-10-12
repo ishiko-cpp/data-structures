@@ -31,5 +31,11 @@ library IshikoDataStructures
     headers
     {
         ../../include/Ishiko/DataStructures.hpp
+        ../../include/Ishiko/DataStructures/RedBlackTree.hpp
+    }
+
+    sources
+    {
+        ../src/RedBlackTree.cpp
     }
 }
