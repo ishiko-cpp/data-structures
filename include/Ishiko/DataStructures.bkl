@@ -1,0 +1,20 @@
+setting ISHIKO_CPP_DATASTRUCTURES_ROOT
+{
+    help = "Path to the Ishiko/C++ DataStructures installation";
+    default = '$(ISHIKO_CPP_ROOT)/data-structures';
+}
+
+template IshikoDataStructures
+{
+    includedirs += $(ISHIKO_CPP_DATASTRUCTURES_ROOT)/include;
+
+    if ($(toolset) == gnu)
+    {
+        libdirs += $(ISHIKO_CPP_DATASTRUCTURES_ROOT)/lib;
+    }
+
+    if ($(toolset) != gnu)
+    {
+        libdirs += $(ISHIKO_CPP_DATASTRUCTURES_ROOT)/lib/$(arch);
+    }
+}

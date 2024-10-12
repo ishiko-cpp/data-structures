@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: BSL-1.0
 
 #include "RedBlackTreeTests.hpp"
+#include "Ishiko/DataStructures/RedBlackTree.hpp"
 
 using namespace Ishiko;
 

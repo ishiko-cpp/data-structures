@@ -1,4 +1,5 @@
 ishikopath = envvar("ISHIKO_CPP_ROOT");
+import $(ishikopath)/data-structures/include/Ishiko/DataStructures.bkl;
 import $(ishikopath)/test-framework/include/Ishiko/TestFramework/Core.bkl;
 
 toolsets = gnu vs2022 vs2019 vs2017 vs2015;
@@ -9,7 +10,7 @@ vs2019.solutionfile = ../vc16/IshikoDataStructureTests.sln;
 vs2017.solutionfile = ../vc15/IshikoDataStructureTests.sln;
 vs2015.solutionfile = ../vc14/IshikoDataStructureTests.sln;
 
-program IshikoDataStructuresTests : IshikoTestFrameworkCore
+program IshikoDataStructuresTests : IshikoTestFrameworkCore, IshikoDataStructures
 {
     archs = x86 x86_64;
 
