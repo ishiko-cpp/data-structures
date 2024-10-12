@@ -13,6 +13,9 @@ jobs:
           name: "Build: Ishiko/C++ Data Structures"
           command: cd /workspace/projects/ishiko/cpp/data-structures/build-files/gnumake && make
       - run:
+          name: "Install test dependency: Ishiko/C++ Errors"
+          command: cd /workspace/projects/ishiko/cpp && git clone https://github.com/ishiko-cpp/errors.git && cd errors/build/gnumake && make
+      - run:
           name: "Install test dependency: Ishiko/C++ TestFramework/Core"
           command: cd /workspace/projects/ishiko/cpp && git clone https://github.com/ishiko-cpp/test-framework.git && cd test-framework/core/build/gnumake && make
       - run:
