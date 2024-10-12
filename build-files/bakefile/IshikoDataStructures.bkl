@@ -1,0 +1,35 @@
+toolsets = gnu vs2022 vs2019 vs2017 vs2015;
+
+gnu.makefile = ../gnumake/GNUmakefile;
+vs2022.solutionfile = ../vc17/IshikoDataStructures.sln;
+vs2019.solutionfile = ../vc16/IshikoDataStructures.sln;
+vs2017.solutionfile = ../vc15/IshikoDataStructures.sln;
+vs2015.solutionfile = ../vc14/IshikoDataStructures.sln;
+
+library IshikoDataStructures
+{
+    archs = x86 x86_64;
+
+    includedirs += ../../include/Ishiko/DataStructures;
+
+    if ($(toolset) == gnu)
+    {
+        cxx-compiler-options = "-std=c++11";
+        outputdir = ../../lib;
+    }
+
+    if ($(toolset) != gnu)
+    {
+        outputdir = ../../lib/$(arch);
+    }
+
+    if ($(config) == Debug)
+    {
+        basename = IshikoDataStructures-d;
+    }
+
+    headers
+    {
+        ../../include/Ishiko/DataStructures.hpp
+    }
+}
