@@ -14,7 +14,8 @@ RedBlackTreeTests::RedBlackTreeTests(const TestNumber& number, const TestContext
 
 void RedBlackTreeTests::ConstructorTest1(Test& test)
 {
-    RedBlackTree tree;
+    RedBlackTree<int> tree;
 
+    ISHIKO_TEST_FAIL_IF_NEQ(tree.size(), 0);
     ISHIKO_TEST_PASS();
 }
