@@ -23,12 +23,14 @@ program IshikoDataStructuresTests : IshikoTestFrameworkCore, IshikoDataStructure
 
     headers
     {
+        ../../src/BinaryTreeTests.hpp
         ../../src/RedBlackTreeTests.hpp
     }
 
     sources
     {
         ../../src/main.cpp
+        ../../src/BinaryTreeTests.cpp
         ../../src/RedBlackTreeTests.cpp
     }
 }

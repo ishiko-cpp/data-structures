@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: 2005-2024 Xavier Leclercq
 // SPDX-License-Identifier: BSL-1.0
 
+#include "BinaryTreeTests.hpp"
 #include "RedBlackTreeTests.hpp"
 #include <Ishiko/TestFramework/Core.hpp>
 #include <exception>
@@ -18,6 +19,7 @@ int main(int argc, char* argv[])
         TestHarness the_test_harness("Ishiko/C++ DataStructures Library Tests", configuration);
 
         TestSequence& the_tests = the_test_harness.tests();
+        the_tests.append<BinaryTreeTests>();
         the_tests.append<RedBlackTreeTests>();
 
         return the_test_harness.run();

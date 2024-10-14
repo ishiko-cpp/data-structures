@@ -4,4 +4,6 @@
 #ifndef GUARD_ISHIKO_CPP_DATASTRUCTURES_HPP
 #define GUARD_ISHIKO_CPP_DATASTRUCTURES_HPP
 
+#include "DataStructures/BinaryTree.hpp"
+
 #endif
