@@ -32,11 +32,13 @@ library IshikoDataStructures
     {
         ../../include/Ishiko/DataStructures.hpp
         ../../include/Ishiko/DataStructures/BinaryTree.hpp
+        ../../include/Ishiko/DataStructures/DataStructuresErrorCategory.hpp
         ../../include/Ishiko/DataStructures/RedBlackTree.hpp
     }
 
     sources
     {
+        ../../src/DataStructuresErrorCategory.cpp
         ../../src/RedBlackTree.cpp
     }
 }

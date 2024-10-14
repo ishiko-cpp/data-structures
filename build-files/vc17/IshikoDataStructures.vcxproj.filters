@@ -23,11 +23,17 @@
     <ClInclude Include="..\..\include\Ishiko\DataStructures\BinaryTree.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\Ishiko\DataStructures\DataStructuresErrorCategory.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\include\Ishiko\DataStructures\RedBlackTree.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\DataStructuresErrorCategory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\RedBlackTree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

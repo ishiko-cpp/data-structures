@@ -56,9 +56,12 @@ $(if $(_builddir_error),$(error Failed to create build directory: $(_builddir_er
 endif
 all: ../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoDataStructures-d,IshikoDataStructures).a
 
-../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoDataStructures-d,IshikoDataStructures).a: $(_builddir)IshikoDataStructures_RedBlackTree.o
-	$(AR) rc $@ $(_builddir)IshikoDataStructures_RedBlackTree.o
+../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoDataStructures-d,IshikoDataStructures).a: $(_builddir)IshikoDataStructures_DataStructuresErrorCategory.o $(_builddir)IshikoDataStructures_RedBlackTree.o
+	$(AR) rc $@ $(_builddir)IshikoDataStructures_DataStructuresErrorCategory.o $(_builddir)IshikoDataStructures_RedBlackTree.o
 	$(RANLIB) $@
+
+$(_builddir)IshikoDataStructures_DataStructuresErrorCategory.o: ../../src/DataStructuresErrorCategory.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../include/Ishiko/DataStructures -std=c++11 ../../src/DataStructuresErrorCategory.cpp
 
 $(_builddir)IshikoDataStructures_RedBlackTree.o: ../../src/RedBlackTree.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../include/Ishiko/DataStructures -std=c++11 ../../src/RedBlackTree.cpp
