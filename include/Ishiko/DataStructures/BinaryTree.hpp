@@ -66,7 +66,7 @@ Ishiko::BinaryTree<DataType>::Node::~Node() noexcept
 }
 
 template<typename DataType>
-typename const Ishiko::BinaryTree<DataType>::Node* Ishiko::BinaryTree<DataType>::Node::leftNode() const noexcept
+const typename Ishiko::BinaryTree<DataType>::Node* Ishiko::BinaryTree<DataType>::Node::leftNode() const noexcept
 {
     return m_left_node;
 }
