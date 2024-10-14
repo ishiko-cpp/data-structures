@@ -17,7 +17,7 @@ jobs:
           command: cd /workspace/projects/ishiko/cpp && git clone https://github.com/ishiko-cpp/base-platform.git && cd base-platform/build-files/gnumake && make
       - run:
           name: "Install test dependency: Ishiko/C++ Errors"
-          command: cd /workspace/projects/ishiko/cpp && git clone https://github.com/ishiko-cpp/errors.git && cd errors/build/gnumake && make
+          command: cd /workspace/projects/ishiko/cpp && git clone https://github.com/ishiko-cpp/errors.git && cd errors/build-files/gnumake && make
       - run:
           name: "Install test dependency: Ishiko/C++ Memory"
           command: cd /workspace/projects/ishiko/cpp && git clone https://github.com/ishiko-cpp/memory.git && cd memory/build/gnumake && make
