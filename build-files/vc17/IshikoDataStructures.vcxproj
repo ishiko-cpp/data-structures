@@ -158,6 +158,7 @@
     <ClInclude Include="..\..\include\Ishiko\DataStructures\BinaryTree.hpp" />
     <ClInclude Include="..\..\include\Ishiko\DataStructures\DataStructuresErrorCategory.hpp" />
     <ClInclude Include="..\..\include\Ishiko\DataStructures\RedBlackTree.hpp" />
+    <ClInclude Include="..\..\include\Ishiko\DataStructures\linkoptions.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

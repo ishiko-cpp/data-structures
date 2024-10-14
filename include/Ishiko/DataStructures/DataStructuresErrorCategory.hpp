@@ -10,7 +10,21 @@ namespace Ishiko
 {
     class DataStructuresErrorCategory : public ErrorCategory
     {
+    public:
+        enum class Value
+        {
+            generic_error = -1,
+            node_does_not_exist = -2
+        };
+
+        static const DataStructuresErrorCategory& Get() noexcept;
+
+        const char* name() const noexcept override;
+        const char* message(int ev, char* buffer, size_t len) const noexcept override;
     };
+
+    void Fail(DataStructuresErrorCategory::Value value, const std::string& message, const char* file, int line,
+        Error& error) noexcept;
 }
 
 #endif

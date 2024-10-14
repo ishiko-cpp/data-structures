@@ -37,6 +37,7 @@ library IshikoDataStructures : IshikoErrors
         ../../include/Ishiko/DataStructures/BinaryTree.hpp
         ../../include/Ishiko/DataStructures/DataStructuresErrorCategory.hpp
         ../../include/Ishiko/DataStructures/RedBlackTree.hpp
+        ../../include/Ishiko/DataStructures/linkoptions.hpp
     }
 
     sources

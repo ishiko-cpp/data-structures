@@ -3,6 +3,7 @@
 
 #include "BinaryTreeTests.hpp"
 #include "RedBlackTreeTests.hpp"
+#include "Ishiko/DataStructures/linkoptions.hpp"
 #include <Ishiko/TestFramework/Core.hpp>
 #include <exception>
 
