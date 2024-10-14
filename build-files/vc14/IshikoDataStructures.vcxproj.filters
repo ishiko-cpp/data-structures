@@ -20,6 +20,9 @@
     <ClInclude Include="..\..\include\Ishiko\DataStructures.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\Ishiko\DataStructures\BinaryTree.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\include\Ishiko\DataStructures\RedBlackTree.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
