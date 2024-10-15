@@ -19,6 +19,7 @@ BinaryTreeTests::BinaryTreeTests(const TestNumber& number, const TestContext& co
     append<HeapAllocationErrorsTest>("doInorderTraversal test 1", DoInorderTraversalTest1);
     append<HeapAllocationErrorsTest>("doInorderTraversal test 2", DoInorderTraversalTest2);
     append<HeapAllocationErrorsTest>("doInorderTraversal test 3", DoInorderTraversalTest3);
+    append<HeapAllocationErrorsTest>("rotateLeft test 1", RotateLeftTest1);
 }
 
 void BinaryTreeTests::ConstructorTest1(Test& test)
@@ -243,5 +244,27 @@ void BinaryTreeTests::DoInorderTraversalTest3(Test& test)
     );
 
     ISHIKO_TEST_FAIL_IF_NEQ(output, std::vector<int>({3, 5, 7}));
+    ISHIKO_TEST_PASS();
+}
+
+
+void BinaryTreeTests::RotateLeftTest1(Test& test)
+{
+    BinaryTree<int> tree;
+    tree.setRoot(5);
+    BinaryTree<int>::Node* root_node = tree.root();
+    BinaryTree<int>::Node* right_child_node = tree.insertRight(7, root_node);
+
+    tree.rotateLeft(root_node);
+
+    ISHIKO_TEST_FAIL_IF_NEQ(tree.root(), right_child_node);
+    ISHIKO_TEST_FAIL_IF_NEQ(right_child_node->parentNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(right_child_node->leftNode(), root_node);
+    ISHIKO_TEST_FAIL_IF_NEQ(right_child_node->rightNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(right_child_node->data(), 7);
+    ISHIKO_TEST_FAIL_IF_NEQ(root_node->parentNode(), right_child_node);
+    ISHIKO_TEST_FAIL_IF_NEQ(root_node->leftNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(root_node->rightNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(root_node->data(), 5);
     ISHIKO_TEST_PASS();
 }
