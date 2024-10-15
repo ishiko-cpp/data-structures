@@ -37,10 +37,10 @@ endif
 # Additionally, this makefile is customizable with the following
 # settings:
 #
-#      ISHIKO_CPP_DATASTRUCTURES_ROOT  Path to the Ishiko/C++ DataStructures installation
 #      ISHIKO_CPP_BASEPLATFORM_ROOT    Path to the Ishiko/C++ BasePlatform installation
 #      ISHIKO_CPP_ERRORS_ROOT          Path to the Ishiko/C++ Errors installation
 #      ISHIKO_CPP_MEMORY_ROOT          Path to the Ishiko/C++ Memory installation
+#      ISHIKO_CPP_DATASTRUCTURES_ROOT  Path to the Ishiko/C++ DataStructures installation
 #      ISHIKO_CPP_BOOST_ROOT           Path to the Boost installation
 #      ISHIKO_CPP_TEXT_ROOT            Path to the Ishiko/C++ Text installation
 #      ISHIKO_CPP_CONFIGURATION_ROOT   Path to the Ishiko/C++ Configuration installation
@@ -74,14 +74,14 @@ endif
 # Configurable settings:
 # 
 
-# Path to the Ishiko/C++ DataStructures installation
-ISHIKO_CPP_DATASTRUCTURES_ROOT ?= $(ISHIKO_CPP_ROOT)/data-structures
 # Path to the Ishiko/C++ BasePlatform installation
 ISHIKO_CPP_BASEPLATFORM_ROOT ?= $(ISHIKO_CPP_ROOT)/base-platform
 # Path to the Ishiko/C++ Errors installation
 ISHIKO_CPP_ERRORS_ROOT ?= $(ISHIKO_CPP_ROOT)/errors
 # Path to the Ishiko/C++ Memory installation
 ISHIKO_CPP_MEMORY_ROOT ?= $(ISHIKO_CPP_ROOT)/memory
+# Path to the Ishiko/C++ DataStructures installation
+ISHIKO_CPP_DATASTRUCTURES_ROOT ?= $(ISHIKO_CPP_ROOT)/data-structures
 # Path to the Boost installation
 ISHIKO_CPP_BOOST_ROOT ?= $(BOOST_ROOT)
 # Path to the Ishiko/C++ Text installation

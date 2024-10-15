@@ -1,5 +1,6 @@
 ishikopath = envvar("ISHIKO_CPP_ROOT");
 import $(ishikopath)/errors/include/Ishiko/Errors.bkl;
+import $(ishikopath)/memory/include/Ishiko/Memory.bkl;
 
 toolsets = gnu vs2022 vs2019 vs2017 vs2015;
 
@@ -9,7 +10,7 @@ vs2019.solutionfile = ../vc16/IshikoDataStructures.sln;
 vs2017.solutionfile = ../vc15/IshikoDataStructures.sln;
 vs2015.solutionfile = ../vc14/IshikoDataStructures.sln;
 
-library IshikoDataStructures : IshikoErrors
+library IshikoDataStructures : IshikoMemory, IshikoErrors
 {
     archs = x86 x86_64;
 
