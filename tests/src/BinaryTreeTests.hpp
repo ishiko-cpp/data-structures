@@ -23,6 +23,7 @@ private:
     static void DoInorderTraversalTest2(Ishiko::Test& test);
     static void DoInorderTraversalTest3(Ishiko::Test& test);
     static void RotateLeftTest1(Ishiko::Test& test);
+    static void RotateRightTest1(Ishiko::Test& test);
 };
 
 #endif
