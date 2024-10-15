@@ -157,9 +157,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp" />
+    <ClCompile Include="..\..\src\BinaryTreeTests.cpp" />
     <ClCompile Include="..\..\src\RedBlackTreeTests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\BinaryTreeTests.hpp" />
     <ClInclude Include="..\..\src\RedBlackTreeTests.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

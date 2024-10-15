@@ -17,18 +17,20 @@ program IshikoDataStructuresTests : IshikoTestFrameworkCore, IshikoDataStructure
     if ($(toolset) == gnu)
     {
         cxx-compiler-options = "-std=c++11";
-        libs += IshikoTestFrameworkCore IshikoConfiguration IshikoXML IshikoFileSystem IshikoIO IshikoProcess IshikoTime IshikoText IshikoErrors IshikoBasePlatform;
+        libs += IshikoTestFrameworkCore IshikoConfiguration IshikoXML IshikoFileSystem IshikoIO IshikoProcess IshikoTime IshikoText IshikoDataStructures IshikoMemory IshikoErrors IshikoBasePlatform;
         libs += fmt boost_filesystem;
     }
 
     headers
     {
+        ../../src/BinaryTreeTests.hpp
         ../../src/RedBlackTreeTests.hpp
     }
 
     sources
     {
         ../../src/main.cpp
+        ../../src/BinaryTreeTests.cpp
         ../../src/RedBlackTreeTests.cpp
     }
 }
