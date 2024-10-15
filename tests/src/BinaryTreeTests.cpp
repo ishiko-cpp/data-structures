@@ -47,6 +47,9 @@ void BinaryTreeTests::SetRootTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_ABORT_IF_EQ(node, nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(node->parentNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(node->leftNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(node->rightNode(), nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(node->data(), 5);
     ISHIKO_TEST_PASS();
 }
@@ -65,6 +68,9 @@ void BinaryTreeTests::SetRootTest2(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_ABORT_IF_EQ(node, nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(node->parentNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(node->leftNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(node->rightNode(), nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(node->data(), 5);
     ISHIKO_TEST_PASS();
 }
@@ -84,6 +90,9 @@ void BinaryTreeTests::InsertLeftTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF_EQ(left_child_node, nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(root_node->leftNode(), left_child_node);
+    ISHIKO_TEST_FAIL_IF_NEQ(left_child_node->parentNode(), root_node);
+    ISHIKO_TEST_FAIL_IF_NEQ(left_child_node->leftNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(left_child_node->rightNode(), nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(left_child_node->data(), 3);
     ISHIKO_TEST_PASS();
 }
@@ -103,14 +112,23 @@ void BinaryTreeTests::InsertLeftTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF_EQ(left_child_node_1, nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(root_node->leftNode(), left_child_node_1);
+    ISHIKO_TEST_FAIL_IF_NEQ(left_child_node_1->parentNode(), root_node);
+    ISHIKO_TEST_FAIL_IF_NEQ(left_child_node_1->leftNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(left_child_node_1->rightNode(), nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(left_child_node_1->data(), 3);
 
     BinaryTree<int>::Node* left_child_node_2 = tree.insertLeft(7, root_node);
 
     ISHIKO_TEST_ABORT_IF_EQ(left_child_node_2, nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(root_node->leftNode(), left_child_node_2);
+    ISHIKO_TEST_FAIL_IF_NEQ(left_child_node_2->parentNode(), root_node);
     ISHIKO_TEST_FAIL_IF_NEQ(left_child_node_2->leftNode(), left_child_node_1);
+    ISHIKO_TEST_FAIL_IF_NEQ(left_child_node_2->rightNode(), nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(left_child_node_2->data(), 7);
+    ISHIKO_TEST_FAIL_IF_NEQ(left_child_node_1->parentNode(), left_child_node_2);
+    ISHIKO_TEST_FAIL_IF_NEQ(left_child_node_1->leftNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(left_child_node_1->rightNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(left_child_node_1->data(), 3);
 
     ISHIKO_TEST_PASS();
 }
@@ -130,6 +148,9 @@ void BinaryTreeTests::InsertRightTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF_EQ(right_child_node, nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(root_node->rightNode(), right_child_node);
+    ISHIKO_TEST_FAIL_IF_NEQ(right_child_node->parentNode(), root_node);
+    ISHIKO_TEST_FAIL_IF_NEQ(right_child_node->leftNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(right_child_node->rightNode(), nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(right_child_node->data(), 3);
     ISHIKO_TEST_PASS();
 }
@@ -149,14 +170,23 @@ void BinaryTreeTests::InsertRightTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF_EQ(right_child_node_1, nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(root_node->rightNode(), right_child_node_1);
+    ISHIKO_TEST_FAIL_IF_NEQ(right_child_node_1->parentNode(), root_node);
+    ISHIKO_TEST_FAIL_IF_NEQ(right_child_node_1->leftNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(right_child_node_1->rightNode(), nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(right_child_node_1->data(), 3);
 
     BinaryTree<int>::Node* right_child_node_2 = tree.insertRight(7, root_node);
 
     ISHIKO_TEST_ABORT_IF_EQ(right_child_node_2, nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(root_node->rightNode(), right_child_node_2);
+    ISHIKO_TEST_FAIL_IF_NEQ(right_child_node_2->parentNode(), root_node);
+    ISHIKO_TEST_FAIL_IF_NEQ(right_child_node_2->leftNode(), nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(right_child_node_2->rightNode(), right_child_node_1);
     ISHIKO_TEST_FAIL_IF_NEQ(right_child_node_2->data(), 7);
+    ISHIKO_TEST_FAIL_IF_NEQ(right_child_node_1->parentNode(), right_child_node_2);
+    ISHIKO_TEST_FAIL_IF_NEQ(right_child_node_1->leftNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(right_child_node_1->rightNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(right_child_node_1->data(), 3);
 
     ISHIKO_TEST_PASS();
 }
