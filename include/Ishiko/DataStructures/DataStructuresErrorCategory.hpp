@@ -14,7 +14,9 @@ namespace Ishiko
         enum class Value
         {
             generic_error = -1,
-            node_does_not_exist = -2
+            node_does_not_exist = -2,
+            right_child_node_does_not_exist = -3,
+            left_child_node_does_not_exist = -4
         };
 
         static const DataStructuresErrorCategory& Get() noexcept;

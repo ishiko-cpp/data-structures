@@ -179,7 +179,7 @@ typename Ishiko::BinaryTree<DataType>::Node* Ishiko::BinaryTree<DataType>::root(
 {
     if (m_root == nullptr)
     {
-        Fail(DataStructuresErrorCategory::Value::generic_error, "Binary tree is empty", __FILE__, __LINE__, error);
+        Fail(DataStructuresErrorCategory::Value::node_does_not_exist, "Binary tree is empty", __FILE__, __LINE__, error);
     }
     return m_root;
 }
@@ -189,7 +189,7 @@ typename Ishiko::BinaryTree<DataType>::Node* Ishiko::BinaryTree<DataType>::root(
 {
     if (m_root == nullptr)
     {
-        Throw(DataStructuresErrorCategory::Value::generic_error, "Binary tree is empty", __FILE__, __LINE__);
+        Throw(DataStructuresErrorCategory::Value::node_does_not_exist, "Binary tree is empty", __FILE__, __LINE__);
     }
     return m_root;
 }
@@ -280,7 +280,8 @@ void Ishiko::BinaryTree<DataType>::rotateLeft(Node* node)
     Node* right_child_node = node->rightNode();
     if (!right_child_node)
     {
-        // TODO: error
+        Throw(DataStructuresErrorCategory::Value::right_child_node_does_not_exist,
+            "Left rotation requires a right child node", __FILE__, __LINE__);
     }
 
     Node* parent_node = node->parentNode();
@@ -310,7 +311,8 @@ void Ishiko::BinaryTree<DataType>::rotateRight(Node* node)
     Node* left_child_node = node->leftNode();
     if (!left_child_node)
     {
-        // TODO: error
+        Throw(DataStructuresErrorCategory::Value::left_child_node_does_not_exist,
+            "Right rotation requires a left child node", __FILE__, __LINE__);
     }
 
     Node* parent_node = node->parentNode();
