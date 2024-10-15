@@ -13,14 +13,14 @@ jobs:
       - run:
           name: "Install build dependency: Ishiko/C++ Errors"
           command: cd /workspace/projects/ishiko/cpp && git clone https://github.com/ishiko-cpp/errors.git && cd errors/build-files/gnumake && make
+      - run:
+          name: "Install build dependency: Ishiko/C++ Memory"
+          command: cd /workspace/projects/ishiko/cpp && git clone https://github.com/ishiko-cpp/memory.git && cd memory/build-files/gnumake && make
       - checkout:
           path: /workspace/projects/ishiko/cpp/data-structures
       - run:
           name: "Build: Ishiko/C++ Data Structures"
           command: cd /workspace/projects/ishiko/cpp/data-structures/build-files/gnumake && make
-      - run:
-          name: "Install test dependency: Ishiko/C++ Memory"
-          command: cd /workspace/projects/ishiko/cpp && git clone https://github.com/ishiko-cpp/memory.git && cd memory/build-files/gnumake && make
       - run:
           name: "Install test dependency: Ishiko/C++ Types"
           command: cd /workspace/projects/ishiko/cpp && git clone https://github.com/ishiko-cpp/types.git && cd types/build-files/gnumake && make
