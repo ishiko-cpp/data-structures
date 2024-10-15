@@ -14,6 +14,7 @@ public:
 private:
     static void ConstructorTest1(Ishiko::Test& test);
     static void SetRootTest1(Ishiko::Test& test);
+    static void SetRootTest2(Ishiko::Test& test);
     static void InsertLeftTest1(Ishiko::Test& test);
     static void InsertLeftTest2(Ishiko::Test& test);
 };

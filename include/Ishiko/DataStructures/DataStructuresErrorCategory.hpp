@@ -21,6 +21,9 @@ namespace Ishiko
 
         const char* name() const noexcept override;
         const char* message(int ev, char* buffer, size_t len) const noexcept override;
+
+    private:
+        DataStructuresErrorCategory() noexcept = default;
     };
 
     void Fail(DataStructuresErrorCategory::Value value, const std::string& message, const char* file, int line,

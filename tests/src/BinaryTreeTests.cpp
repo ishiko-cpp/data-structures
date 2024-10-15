@@ -11,6 +11,7 @@ BinaryTreeTests::BinaryTreeTests(const TestNumber& number, const TestContext& co
 {
     append<HeapAllocationErrorsTest>("Constructor test 1", ConstructorTest1);
     append<HeapAllocationErrorsTest>("setRoot test 1", SetRootTest1);
+    append<HeapAllocationErrorsTest>("setRoot test 2", SetRootTest2);
     append<HeapAllocationErrorsTest>("insertLeft test 1", InsertLeftTest1);
     append<HeapAllocationErrorsTest>("insertLeft test 2", InsertLeftTest2);
 }
@@ -37,6 +38,24 @@ void BinaryTreeTests::SetRootTest1(Test& test)
     ISHIKO_TEST_FAIL_IF(tree.isEmpty());
 
     Error error;
+    BinaryTree<int>::Node* node = tree.root(error);
+
+    ISHIKO_TEST_FAIL_IF(error);
+    ISHIKO_TEST_ABORT_IF_EQ(node, nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(node->data(), 5);
+    ISHIKO_TEST_PASS();
+}
+
+void BinaryTreeTests::SetRootTest2(Test& test)
+{
+    Error error;
+
+    BinaryTree<int> tree;
+    tree.setRoot(5, error);
+
+    ISHIKO_TEST_FAIL_IF(error);
+    ISHIKO_TEST_FAIL_IF(tree.isEmpty());
+
     BinaryTree<int>::Node* node = tree.root(error);
 
     ISHIKO_TEST_FAIL_IF(error);

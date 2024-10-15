@@ -6,7 +6,7 @@
 
 #include "DataStructuresErrorCategory.hpp"
 #include <Ishiko/Errors.hpp>
-#include <memory>
+#include <Ishiko/Memory.hpp>
 
 namespace Ishiko
 {
@@ -40,6 +40,7 @@ namespace Ishiko
         Node* root(Error& error) noexcept;
 
         void setRoot(const DataType& data);
+        void setRoot(const DataType& data, Error& error) noexcept;
         Node* insertLeft(const DataType& data, Node* parent_node);
 
     private:
@@ -123,6 +124,19 @@ void Ishiko::BinaryTree<DataType>::setRoot(const DataType& data)
     if (m_root == nullptr)
     {
         m_root = new Node(data);
+    }
+    else
+    {
+        m_root->data() = data;
+    }
+}
+
+template<typename DataType>
+void Ishiko::BinaryTree<DataType>::setRoot(const DataType& data, Error& error) noexcept
+{
+    if (m_root == nullptr)
+    {
+        m_root = NewObject<Node>(error, data);
     }
     else
     {
