@@ -16,6 +16,7 @@ BinaryTreeTests::BinaryTreeTests(const TestNumber& number, const TestContext& co
     append<HeapAllocationErrorsTest>("insertLeft test 2", InsertLeftTest2);
     append<HeapAllocationErrorsTest>("insertRight test 1", InsertRightTest1);
     append<HeapAllocationErrorsTest>("insertRight test 2", InsertRightTest2);
+    append<HeapAllocationErrorsTest>("doInorderTraversal test 1", DoInorderTraversalTest1);
 }
 
 void BinaryTreeTests::ConstructorTest1(Test& test)
@@ -155,5 +156,22 @@ void BinaryTreeTests::InsertRightTest2(Test& test)
     ISHIKO_TEST_FAIL_IF_NEQ(right_child_node_2->rightNode(), right_child_node_1);
     ISHIKO_TEST_FAIL_IF_NEQ(right_child_node_2->data(), 7);
 
+    ISHIKO_TEST_PASS();
+}
+
+void BinaryTreeTests::DoInorderTraversalTest1(Test& test)
+{
+    BinaryTree<int> tree;
+
+    size_t called = 0;
+
+    tree.doInorderTraversal(
+        [&called](int data)
+        {
+            ++called;
+        }
+    );
+
+    ISHIKO_TEST_FAIL_IF_NEQ(called, 0);
     ISHIKO_TEST_PASS();
 }

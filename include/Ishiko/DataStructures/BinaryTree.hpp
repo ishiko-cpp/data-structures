@@ -43,6 +43,9 @@ namespace Ishiko
         bool isEmpty() const noexcept;
         Node* root(Error& error) noexcept;
 
+        template<typename Callable>
+        void doInorderTraversal(Callable&& callable) const;
+
         void setRoot(const DataType& data);
         void setRoot(const DataType& data, Error& error) noexcept;
         Node* insertLeft(const DataType& data, Node* parent_node);
@@ -142,6 +145,13 @@ typename Ishiko::BinaryTree<DataType>::Node* Ishiko::BinaryTree<DataType>::root(
         Fail(DataStructuresErrorCategory::Value::generic_error, "Binary tree is empty", __FILE__, __LINE__, error);
     }
     return m_root;
+}
+
+template <typename DataType>
+template<typename Callable>
+void Ishiko::BinaryTree<DataType>::doInorderTraversal(Callable&& callable) const
+{
+
 }
 
 template<typename DataType>

@@ -19,6 +19,7 @@ private:
     static void InsertLeftTest2(Ishiko::Test& test);
     static void InsertRightTest1(Ishiko::Test& test);
     static void InsertRightTest2(Ishiko::Test& test);
+    static void DoInorderTraversalTest1(Ishiko::Test& test);
 };
 
 #endif
