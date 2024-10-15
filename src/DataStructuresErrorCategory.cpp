@@ -31,6 +31,11 @@ const char* DataStructuresErrorCategory::message(int ev, char* buffer, size_t le
     }
 }
 
+void Ishiko::Throw(DataStructuresErrorCategory::Value value, const std::string& message, const char* file, int line)
+{
+    throw Exception(static_cast<int>(value), DataStructuresErrorCategory::Get(), message, file, line);
+}
+
 void Ishiko::Fail(DataStructuresErrorCategory::Value value, const std::string& message, const char* file, int line,
     Error& error) noexcept
 {

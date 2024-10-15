@@ -26,6 +26,7 @@ namespace Ishiko
         DataStructuresErrorCategory() noexcept = default;
     };
 
+    void Throw(DataStructuresErrorCategory::Value value, const std::string& message, const char* file, int line);
     void Fail(DataStructuresErrorCategory::Value value, const std::string& message, const char* file, int line,
         Error& error) noexcept;
 }

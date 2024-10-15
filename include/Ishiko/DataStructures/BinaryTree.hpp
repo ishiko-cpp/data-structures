@@ -41,10 +41,14 @@ namespace Ishiko
         ~BinaryTree() noexcept;
 
         bool isEmpty() const noexcept;
+        Node* root();
         Node* root(Error& error) noexcept;
 
         template<typename Callable>
         void doInorderTraversal(Callable&& callable) const;
+
+        template<typename Callable>
+        void doInorderTraversal(const Node* parent_node, Callable&& callable) const;
 
         void setRoot(const DataType& data);
         void setRoot(const DataType& data, Error& error) noexcept;
@@ -147,11 +151,40 @@ typename Ishiko::BinaryTree<DataType>::Node* Ishiko::BinaryTree<DataType>::root(
     return m_root;
 }
 
+template<typename DataType>
+typename Ishiko::BinaryTree<DataType>::Node* Ishiko::BinaryTree<DataType>::root()
+{
+    if (m_root == nullptr)
+    {
+        Throw(DataStructuresErrorCategory::Value::generic_error, "Binary tree is empty", __FILE__, __LINE__);
+    }
+    return m_root;
+}
+
 template <typename DataType>
 template<typename Callable>
 void Ishiko::BinaryTree<DataType>::doInorderTraversal(Callable&& callable) const
 {
+    if (m_root)
+    {
+        doInorderTraversal(m_root, std::forward<Callable>(callable));
+    }
+}
 
+template <typename DataType>
+template<typename Callable>
+void Ishiko::BinaryTree<DataType>::doInorderTraversal(const Node* parent_node, Callable&& callable) const
+{
+    // TODO: get rid of recursions
+    if (parent_node->leftNode())
+    {
+        doInorderTraversal(parent_node->leftNode(), callable);
+    }
+    callable(parent_node->data());
+    if (parent_node->rightNode())
+    {
+        doInorderTraversal(parent_node->rightNode(), callable);
+    }
 }
 
 template<typename DataType>
