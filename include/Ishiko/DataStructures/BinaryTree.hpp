@@ -18,9 +18,11 @@ namespace Ishiko
         {
         public:
             Node(const DataType& data);
-            Node(Node* left_node, Node* right_node, const DataType& data);
             ~Node() noexcept;
 
+            const Node* parentNode() const noexcept;
+            Node* parentNode() noexcept;
+            void setParentNode(Node* node) noexcept;
             const Node* leftNode() const noexcept;
             Node* leftNode() noexcept;
             void setLeftNode(Node* node) noexcept;
@@ -32,6 +34,7 @@ namespace Ishiko
             DataType& data() noexcept;
 
         private:
+            Node* m_parent_node = nullptr;
             Node* m_left_node = nullptr;
             Node* m_right_node = nullptr;
             DataType m_data;
@@ -57,6 +60,9 @@ namespace Ishiko
         //Node* insertLeft(const DataType& data, Node* parent_node, Error& error) noexcept;
         Node* insertRight(const DataType& data, Node* parent_node);
 
+        void rotateLeft(Node* node);
+        void rotateRight(Node* node);
+
     private:
         Node* m_root = nullptr;
     };
@@ -64,13 +70,7 @@ namespace Ishiko
 
 template<typename DataType>
 Ishiko::BinaryTree<DataType>::Node::Node(const DataType& data)
-    : m_data{data}
-{
-}
-
-template<typename DataType>
-Ishiko::BinaryTree<DataType>::Node::Node(Node* left_node, Node* right_node, const DataType& data)
-    : m_left_node(left_node), m_right_node(right_node), m_data(data)
+    : m_data(data)
 {
 }
 
@@ -79,6 +79,24 @@ Ishiko::BinaryTree<DataType>::Node::~Node() noexcept
 {
     delete m_left_node;
     delete m_right_node;
+}
+
+template<typename DataType>
+const typename Ishiko::BinaryTree<DataType>::Node* Ishiko::BinaryTree<DataType>::Node::parentNode() const noexcept
+{
+    return m_parent_node;
+}
+
+template<typename DataType>
+typename Ishiko::BinaryTree<DataType>::Node* Ishiko::BinaryTree<DataType>::Node::parentNode() noexcept
+{
+    return m_parent_node;
+}
+
+template<typename DataType>
+void Ishiko::BinaryTree<DataType>::Node::setParentNode(Node* node) noexcept
+{
+    m_parent_node = node;
 }
 
 template<typename DataType>
@@ -97,6 +115,10 @@ template<typename DataType>
 void Ishiko::BinaryTree<DataType>::Node::setLeftNode(Node* node) noexcept
 {
     m_left_node = node;
+    if (node)
+    {
+        node->setParentNode(this);
+    }
 }
 
 template<typename DataType>
@@ -115,6 +137,10 @@ template<typename DataType>
 void Ishiko::BinaryTree<DataType>::Node::setRightNode(Node* node) noexcept
 {
     m_right_node = node;
+    if (node)
+    {
+        node->setParentNode(this);
+    }
 }
 
 template<typename DataType>
@@ -146,7 +172,7 @@ typename Ishiko::BinaryTree<DataType>::Node* Ishiko::BinaryTree<DataType>::root(
 {
     if (m_root == nullptr)
     {
-        Fail(DataStructuresErrorCategory::Value::generic_error, "Binary tree is empty", __FILE__, __LINE__, error);
+        Fail(DataStructuresErrorCategory::Value::node_does_not_exist, "Binary tree is empty", __FILE__, __LINE__, error);
     }
     return m_root;
 }
@@ -156,7 +182,7 @@ typename Ishiko::BinaryTree<DataType>::Node* Ishiko::BinaryTree<DataType>::root(
 {
     if (m_root == nullptr)
     {
-        Throw(DataStructuresErrorCategory::Value::generic_error, "Binary tree is empty", __FILE__, __LINE__);
+        Throw(DataStructuresErrorCategory::Value::node_does_not_exist, "Binary tree is empty", __FILE__, __LINE__);
     }
     return m_root;
 }
@@ -218,7 +244,8 @@ typename Ishiko::BinaryTree<DataType>::Node* Ishiko::BinaryTree<DataType>::inser
     Node* parent_node)
 {
     Node* existing_left_node = parent_node->leftNode();
-    Node* new_node = new Node{existing_left_node, nullptr, data};
+    Node* new_node = new Node(data);
+    new_node->setLeftNode(existing_left_node);
     parent_node->setLeftNode(new_node);
     return new_node;
 }
@@ -228,9 +255,72 @@ typename Ishiko::BinaryTree<DataType>::Node* Ishiko::BinaryTree<DataType>::inser
     Node* parent_node)
 {
     Node* existing_right_node = parent_node->rightNode();
-    Node* new_node = new Node(nullptr, existing_right_node, data);
+    Node* new_node = new Node(data);
+    new_node->setRightNode(existing_right_node);
     parent_node->setRightNode(new_node);
     return new_node;
+}
+
+template<typename DataType>
+void Ishiko::BinaryTree<DataType>::rotateLeft(Node* node)
+{
+    Node* right_child_node = node->rightNode();
+    if (!right_child_node)
+    {
+        Throw(DataStructuresErrorCategory::Value::right_child_node_does_not_exist,
+            "Left rotation requires a right child node", __FILE__, __LINE__);
+    }
+
+    Node* parent_node = node->parentNode();
+    if (parent_node)
+    {
+        if (parent_node->leftNode() == node)
+        {
+            parent_node->setLeftNode(right_child_node);
+        }
+        else
+        {
+            parent_node->setRightNode(right_child_node);
+        }
+    }
+    else
+    {
+        m_root = right_child_node;
+        right_child_node->setParentNode(nullptr);
+    }
+    node->setRightNode(right_child_node->leftNode());
+    right_child_node->setLeftNode(node);
+}
+
+template<typename DataType>
+void Ishiko::BinaryTree<DataType>::rotateRight(Node* node)
+{
+    Node* left_child_node = node->leftNode();
+    if (!left_child_node)
+    {
+        Throw(DataStructuresErrorCategory::Value::left_child_node_does_not_exist,
+            "Right rotation requires a left child node", __FILE__, __LINE__);
+    }
+
+    Node* parent_node = node->parentNode();
+    if (parent_node)
+    {
+        if (parent_node->leftNode() == node)
+        {
+            parent_node->setLeftNode(left_child_node);
+        }
+        else
+        {
+            parent_node->setRightNode(left_child_node);
+        }
+    }
+    else
+    {
+        m_root = left_child_node;
+        left_child_node->setParentNode(nullptr);
+    }
+    node->setLeftNode(left_child_node->rightNode());
+    left_child_node->setRightNode(node);
 }
 
 #endif

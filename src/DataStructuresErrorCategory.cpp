@@ -26,6 +26,12 @@ const char* DataStructuresErrorCategory::message(int ev, char* buffer, size_t le
     case Value::node_does_not_exist:
         return "node does not exist";
 
+    case Value::right_child_node_does_not_exist:
+        return "right child node does not exist";
+
+    case Value::left_child_node_does_not_exist:
+        return "left child node does not exist";
+
     default:
         return "unknown value";
     }
