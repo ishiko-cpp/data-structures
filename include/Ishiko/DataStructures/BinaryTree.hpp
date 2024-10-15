@@ -18,18 +18,22 @@ namespace Ishiko
         {
         public:
             Node(const DataType& data);
-            Node(Node* left_node, const DataType& data);
+            Node(Node* left_node, Node* right_node, const DataType& data);
             ~Node() noexcept;
 
             const Node* leftNode() const noexcept;
             Node* leftNode() noexcept;
             void setLeftNode(Node* node) noexcept;
+            const Node* rightNode() const noexcept;
+            Node* rightNode() noexcept;
+            void setRightNode(Node* node) noexcept;
 
             const DataType& data() const noexcept;
             DataType& data() noexcept;
 
         private:
             Node* m_left_node = nullptr;
+            Node* m_right_node = nullptr;
             DataType m_data;
         };
 
@@ -42,6 +46,9 @@ namespace Ishiko
         void setRoot(const DataType& data);
         void setRoot(const DataType& data, Error& error) noexcept;
         Node* insertLeft(const DataType& data, Node* parent_node);
+        // TODO
+        //Node* insertLeft(const DataType& data, Node* parent_node, Error& error) noexcept;
+        Node* insertRight(const DataType& data, Node* parent_node);
 
     private:
         Node* m_root = nullptr;
@@ -55,8 +62,8 @@ Ishiko::BinaryTree<DataType>::Node::Node(const DataType& data)
 }
 
 template<typename DataType>
-Ishiko::BinaryTree<DataType>::Node::Node(Node* left_node, const DataType& data)
-    : m_left_node{left_node}, m_data{data}
+Ishiko::BinaryTree<DataType>::Node::Node(Node* left_node, Node* right_node, const DataType& data)
+    : m_left_node(left_node), m_right_node(right_node), m_data(data)
 {
 }
 
@@ -64,6 +71,7 @@ template<typename DataType>
 Ishiko::BinaryTree<DataType>::Node::~Node() noexcept
 {
     delete m_left_node;
+    delete m_right_node;
 }
 
 template<typename DataType>
@@ -82,6 +90,24 @@ template<typename DataType>
 void Ishiko::BinaryTree<DataType>::Node::setLeftNode(Node* node) noexcept
 {
     m_left_node = node;
+}
+
+template<typename DataType>
+const typename Ishiko::BinaryTree<DataType>::Node* Ishiko::BinaryTree<DataType>::Node::rightNode() const noexcept
+{
+    return m_right_node;
+}
+
+template<typename DataType>
+typename Ishiko::BinaryTree<DataType>::Node* Ishiko::BinaryTree<DataType>::Node::rightNode() noexcept
+{
+    return m_right_node;
+}
+
+template<typename DataType>
+void Ishiko::BinaryTree<DataType>::Node::setRightNode(Node* node) noexcept
+{
+    m_right_node = node;
 }
 
 template<typename DataType>
@@ -149,8 +175,18 @@ typename Ishiko::BinaryTree<DataType>::Node* Ishiko::BinaryTree<DataType>::inser
     Node* parent_node)
 {
     Node* existing_left_node = parent_node->leftNode();
-    Node* new_node = new Node{existing_left_node, data};
+    Node* new_node = new Node{existing_left_node, nullptr, data};
     parent_node->setLeftNode(new_node);
+    return new_node;
+}
+
+template<typename DataType>
+typename Ishiko::BinaryTree<DataType>::Node* Ishiko::BinaryTree<DataType>::insertRight(const DataType& data,
+    Node* parent_node)
+{
+    Node* existing_right_node = parent_node->rightNode();
+    Node* new_node = new Node(nullptr, existing_right_node, data);
+    parent_node->setRightNode(new_node);
     return new_node;
 }
 

@@ -17,6 +17,8 @@ private:
     static void SetRootTest2(Ishiko::Test& test);
     static void InsertLeftTest1(Ishiko::Test& test);
     static void InsertLeftTest2(Ishiko::Test& test);
+    static void InsertRightTest1(Ishiko::Test& test);
+    static void InsertRightTest2(Ishiko::Test& test);
 };
 
 #endif
