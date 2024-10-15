@@ -1,10 +1,14 @@
+ishikopath = envvar("ISHIKO_CPP_ROOT");
+import $(ishikopath)/errors/include/Ishiko/Errors.bkl;
+import $(ishikopath)/memory/include/Ishiko/Memory.bkl;
+
 setting ISHIKO_CPP_DATASTRUCTURES_ROOT
 {
     help = "Path to the Ishiko/C++ DataStructures installation";
     default = '$(ISHIKO_CPP_ROOT)/data-structures';
 }
 
-template IshikoDataStructures
+template IshikoDataStructures : IshikoMemory, IshikoErrors
 {
     includedirs += $(ISHIKO_CPP_DATASTRUCTURES_ROOT)/include;
 
