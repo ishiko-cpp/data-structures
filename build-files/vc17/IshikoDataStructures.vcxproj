@@ -160,6 +160,7 @@
     <ClInclude Include="..\..\include\Ishiko\DataStructures\DoublyLinkedList.hpp" />
     <ClInclude Include="..\..\include\Ishiko\DataStructures\RedBlackTree.hpp" />
     <ClInclude Include="..\..\include\Ishiko\DataStructures\SinglyLinkedList.hpp" />
+    <ClInclude Include="..\..\include\Ishiko\DataStructures\SkipList.hpp" />
     <ClInclude Include="..\..\include\Ishiko\DataStructures\linkoptions.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
