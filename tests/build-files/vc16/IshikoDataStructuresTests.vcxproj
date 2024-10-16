@@ -158,11 +158,13 @@
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\BinaryTreeTests.cpp" />
+    <ClCompile Include="..\..\src\DoublyLinkedListTests.cpp" />
     <ClCompile Include="..\..\src\RedBlackTreeTests.cpp" />
     <ClCompile Include="..\..\src\SinglyLinkedListTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\BinaryTreeTests.hpp" />
+    <ClInclude Include="..\..\src\DoublyLinkedListTests.hpp" />
     <ClInclude Include="..\..\src\RedBlackTreeTests.hpp" />
     <ClInclude Include="..\..\src\SinglyLinkedListTests.hpp" />
   </ItemGroup>

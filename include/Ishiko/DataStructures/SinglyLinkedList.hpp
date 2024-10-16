@@ -64,12 +64,6 @@ Ishiko::SinglyLinkedList<DataType>::Node::~Node() noexcept
 }
 
 template<typename DataType>
-Ishiko::SinglyLinkedList<DataType>::~SinglyLinkedList() noexcept
-{
-    delete m_head;
-}
-
-template<typename DataType>
 const typename Ishiko::SinglyLinkedList<DataType>::Node*
 Ishiko::SinglyLinkedList<DataType>::Node::nextNode() const noexcept
 {
@@ -98,6 +92,12 @@ template<typename DataType>
 DataType& Ishiko::SinglyLinkedList<DataType>::Node::data() noexcept
 {
     return m_data;
+}
+
+template<typename DataType>
+Ishiko::SinglyLinkedList<DataType>::~SinglyLinkedList() noexcept
+{
+    delete m_head;
 }
 
 template<typename DataType>
