@@ -29,6 +29,9 @@
     <ClInclude Include="..\..\include\Ishiko\DataStructures\RedBlackTree.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\Ishiko\DataStructures\SinglyLinkedList.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\include\Ishiko\DataStructures\linkoptions.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
