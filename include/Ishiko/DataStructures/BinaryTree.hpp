@@ -168,21 +168,22 @@ bool Ishiko::BinaryTree<DataType>::isEmpty() const noexcept
 }
 
 template<typename DataType>
-typename Ishiko::BinaryTree<DataType>::Node* Ishiko::BinaryTree<DataType>::root(Error& error) noexcept
-{
-    if (m_root == nullptr)
-    {
-        Fail(DataStructuresErrorCategory::Value::node_does_not_exist, "Binary tree is empty", __FILE__, __LINE__, error);
-    }
-    return m_root;
-}
-
-template<typename DataType>
 typename Ishiko::BinaryTree<DataType>::Node* Ishiko::BinaryTree<DataType>::root()
 {
     if (m_root == nullptr)
     {
         Throw(DataStructuresErrorCategory::Value::node_does_not_exist, "Binary tree is empty", __FILE__, __LINE__);
+    }
+    return m_root;
+}
+
+template<typename DataType>
+typename Ishiko::BinaryTree<DataType>::Node* Ishiko::BinaryTree<DataType>::root(Error& error) noexcept
+{
+    if (m_root == nullptr)
+    {
+        Fail(DataStructuresErrorCategory::Value::node_does_not_exist, "Binary tree is empty", __FILE__, __LINE__,
+            error);
     }
     return m_root;
 }
