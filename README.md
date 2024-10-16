@@ -1,6 +1,7 @@
 # Ishiko/C++ Data Structures
 
-Code to handle differences between operating systems.
+Low level data structures. For more high level collections see the
+[Collections](https://github.com/ishiko-cpp/collections) project.
 
 
 ## Contents
