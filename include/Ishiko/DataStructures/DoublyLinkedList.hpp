@@ -15,6 +15,20 @@ namespace Ishiko
     public:
         class Node
         {
+        public:
+            Node(const DataType& data);
+            ~Node() noexcept;
+
+            const Node* nextNode() const noexcept;
+            Node* nextNode() noexcept;
+            void setNextNode(Node* node) noexcept;
+
+            const DataType& data() const noexcept;
+            DataType& data() noexcept;
+
+        private:
+            Node* m_next_node = nullptr;
+            DataType m_data;
         };
 
         DoublyLinkedList() noexcept = default;
@@ -24,9 +38,56 @@ namespace Ishiko
         Node* head();
         Node* head(Error& error) noexcept;
 
+        void setHead(const DataType& data);
+        void setHead(const DataType& data, Error& error) noexcept;
+
     private:
         Node* m_head = nullptr;
     };
+}
+
+template<typename DataType>
+Ishiko::DoublyLinkedList<DataType>::Node::Node(const DataType& data)
+    : m_data(data)
+{
+}
+
+template<typename DataType>
+Ishiko::DoublyLinkedList<DataType>::Node::~Node() noexcept
+{
+    delete m_next_node;
+}
+
+
+template<typename DataType>
+const typename Ishiko::DoublyLinkedList<DataType>::Node*
+Ishiko::DoublyLinkedList<DataType>::Node::nextNode() const noexcept
+{
+    return m_next_node;
+}
+
+template<typename DataType>
+typename Ishiko::DoublyLinkedList<DataType>::Node* Ishiko::DoublyLinkedList<DataType>::Node::nextNode() noexcept
+{
+    return m_next_node;
+}
+
+template<typename DataType>
+void Ishiko::DoublyLinkedList<DataType>::Node::setNextNode(Node* node) noexcept
+{
+    m_next_node = node;
+}
+
+template<typename DataType>
+const DataType& Ishiko::DoublyLinkedList<DataType>::Node::data() const noexcept
+{
+    return m_data;
+}
+
+template<typename DataType>
+DataType& Ishiko::DoublyLinkedList<DataType>::Node::data() noexcept
+{
+    return m_data;
 }
 
 template<typename DataType>
@@ -60,6 +121,33 @@ typename Ishiko::DoublyLinkedList<DataType>::Node* Ishiko::DoublyLinkedList<Data
             error);
     }
     return m_head;
+}
+
+
+template<typename DataType>
+void Ishiko::DoublyLinkedList<DataType>::setHead(const DataType& data)
+{
+    if (m_head == nullptr)
+    {
+        m_head = new Node(data);
+    }
+    else
+    {
+        m_head->data() = data;
+    }
+}
+
+template<typename DataType>
+void Ishiko::DoublyLinkedList<DataType>::setHead(const DataType& data, Error& error) noexcept
+{
+    if (m_head == nullptr)
+    {
+        m_head = NewObject<Node>(error, data);
+    }
+    else
+    {
+        m_head->data() = data;
+    }
 }
 
 #endif
