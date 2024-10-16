@@ -39,8 +39,12 @@ namespace Ishiko
         Node* head();
         Node* head(Error& error) noexcept;
 
+        template<typename Callable>
+        void traverse(Callable&& callable) const;
+
         void setHead(const DataType& data);
         void setHead(const DataType& data, Error& error) noexcept;
+        Node* insert(const DataType& data, Node* previous_node);
 
     private:
         Node* m_head = nullptr;
@@ -124,6 +128,18 @@ typename Ishiko::SinglyLinkedList<DataType>::Node* Ishiko::SinglyLinkedList<Data
 }
 
 template<typename DataType>
+template<typename Callable>
+void Ishiko::SinglyLinkedList<DataType>::traverse(Callable&& callable) const
+{
+    Node* current_node = m_head;
+    while (current_node)
+    {
+        callable(current_node->data());
+        current_node = current_node->nextNode();
+    }
+}
+
+template<typename DataType>
 void Ishiko::SinglyLinkedList<DataType>::setHead(const DataType& data)
 {
     if (m_head == nullptr)
@@ -147,6 +163,16 @@ void Ishiko::SinglyLinkedList<DataType>::setHead(const DataType& data, Error& er
     {
         m_head->data() = data;
     }
+}
+
+template<typename DataType>
+typename Ishiko::SinglyLinkedList<DataType>::Node* Ishiko::SinglyLinkedList<DataType>::insert(const DataType& data,
+    Node* previous_node)
+{
+    Node* new_node = new Node(data);
+    new_node->setNextNode(previous_node->nextNode());
+    previous_node->setNextNode(new_node);
+    return new_node;
 }
 
 #endif

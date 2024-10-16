@@ -188,7 +188,7 @@ typename Ishiko::BinaryTree<DataType>::Node* Ishiko::BinaryTree<DataType>::root(
     return m_root;
 }
 
-template <typename DataType>
+template<typename DataType>
 template<typename Callable>
 void Ishiko::BinaryTree<DataType>::doInorderTraversal(Callable&& callable) const
 {
@@ -198,7 +198,7 @@ void Ishiko::BinaryTree<DataType>::doInorderTraversal(Callable&& callable) const
     }
 }
 
-template <typename DataType>
+template<typename DataType>
 template<typename Callable>
 void Ishiko::BinaryTree<DataType>::doInorderTraversal(const Node* parent_node, Callable&& callable) const
 {
