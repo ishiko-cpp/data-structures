@@ -16,6 +16,8 @@ private:
     static void SetHeadTest1(Ishiko::Test& test);
     static void SetHeadTest2(Ishiko::Test& test);
     static void InsertAfterTest1(Ishiko::Test& test);
+    static void InsertBeforeTest1(Ishiko::Test& test);
+    static void InsertBeforeTest2(Ishiko::Test& test);
 };
 
 #endif

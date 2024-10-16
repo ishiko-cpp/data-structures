@@ -13,6 +13,8 @@ DoublyLinkedListTests::DoublyLinkedListTests(const TestNumber& number, const Tes
     append<HeapAllocationErrorsTest>("setHead test 1", SetHeadTest1);
     append<HeapAllocationErrorsTest>("setHead test 2", SetHeadTest2);
     append<HeapAllocationErrorsTest>("insertAfter test 1", InsertAfterTest1);
+    append<HeapAllocationErrorsTest>("insertBefore test 1", InsertBeforeTest1);
+    append<HeapAllocationErrorsTest>("insertBefore test 2", InsertBeforeTest2);
 }
 
 void DoublyLinkedListTests::ConstructorTest1(Test& test)
@@ -87,5 +89,68 @@ void DoublyLinkedListTests::InsertAfterTest1(Test& test)
     ISHIKO_TEST_FAIL_IF_NEQ(next_node->previousNode(), head_node);
     ISHIKO_TEST_FAIL_IF_NEQ(next_node->nextNode(), nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(next_node->data(), 3);
+    ISHIKO_TEST_PASS();
+}
+void DoublyLinkedListTests::InsertBeforeTest1(Test& test)
+{
+    DoublyLinkedList<int> list;
+    list.setHead(5);
+
+    Error error;
+    DoublyLinkedList<int>::Node* head_node = list.head(error);
+
+    ISHIKO_TEST_FAIL_IF(error);
+    ISHIKO_TEST_ABORT_IF_EQ(head_node, nullptr);
+
+    DoublyLinkedList<int>::Node* next_node = list.insertBefore(3, head_node);
+
+    ISHIKO_TEST_ABORT_IF_EQ(next_node, nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(next_node->previousNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(next_node->nextNode(), head_node);
+    ISHIKO_TEST_FAIL_IF_NEQ(next_node->data(), 3);
+    ISHIKO_TEST_FAIL_IF_NEQ(head_node->previousNode(), next_node);
+    ISHIKO_TEST_FAIL_IF_NEQ(head_node->nextNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(head_node->data(), 5);
+    ISHIKO_TEST_PASS();
+}
+
+void DoublyLinkedListTests::InsertBeforeTest2(Test& test)
+{
+    DoublyLinkedList<int> list;
+    list.setHead(5);
+
+    Error error;
+    DoublyLinkedList<int>::Node* head_node = list.head(error);
+
+    ISHIKO_TEST_FAIL_IF(error);
+    ISHIKO_TEST_ABORT_IF_EQ(head_node, nullptr);
+
+    DoublyLinkedList<int>::Node* next_node_1 = list.insertBefore(1, head_node);
+
+    ISHIKO_TEST_ABORT_IF_EQ(next_node_1, nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(next_node_1->previousNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(next_node_1->nextNode(), head_node);
+    ISHIKO_TEST_FAIL_IF_NEQ(next_node_1->data(), 1);
+
+    ISHIKO_TEST_FAIL_IF_NEQ(head_node->previousNode(), next_node_1);
+    ISHIKO_TEST_FAIL_IF_NEQ(head_node->nextNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(head_node->data(), 5);
+
+    DoublyLinkedList<int>::Node* next_node_2 = list.insertBefore(3, head_node);
+
+    ISHIKO_TEST_ABORT_IF_EQ(next_node_1, nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(next_node_1->previousNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(next_node_1->nextNode(), next_node_2);
+    ISHIKO_TEST_FAIL_IF_NEQ(next_node_1->data(), 1);
+
+    ISHIKO_TEST_ABORT_IF_EQ(next_node_2, nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(next_node_2->previousNode(), next_node_1);
+    ISHIKO_TEST_FAIL_IF_NEQ(next_node_2->nextNode(), head_node);
+    ISHIKO_TEST_FAIL_IF_NEQ(next_node_2->data(), 3);
+
+    ISHIKO_TEST_FAIL_IF_NEQ(head_node->previousNode(), next_node_2);
+    ISHIKO_TEST_FAIL_IF_NEQ(head_node->nextNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(head_node->data(), 5);
+
     ISHIKO_TEST_PASS();
 }

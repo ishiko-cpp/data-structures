@@ -45,6 +45,7 @@ namespace Ishiko
         void setHead(const DataType& data);
         void setHead(const DataType& data, Error& error) noexcept;
         Node* insertAfter(const DataType& data, Node* previous_node);
+        Node* insertBefore(const DataType& data, Node* next_node);
 
     private:
         static void linkNodes(Node* start_node, Node* end_node) noexcept;
@@ -186,6 +187,24 @@ Ishiko::DoublyLinkedList<DataType>::insertAfter(const DataType& data, Node* prev
         linkNodes(new_node, next_node);
     }
     linkNodes(previous_node, new_node);
+    return new_node;
+}
+
+template<typename DataType>
+typename Ishiko::DoublyLinkedList<DataType>::Node*
+Ishiko::DoublyLinkedList<DataType>::insertBefore(const DataType& data, Node* next_node)
+{
+    Node* new_node = new Node(data);
+    Node* previous_node = next_node->previousNode();
+    if (previous_node)
+    {
+        linkNodes(previous_node, new_node);
+    }
+    else
+    {
+        m_head = new_node;
+    }
+    linkNodes(new_node, next_node);
     return new_node;
 }
 
