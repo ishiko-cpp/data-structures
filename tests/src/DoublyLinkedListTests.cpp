@@ -15,6 +15,9 @@ DoublyLinkedListTests::DoublyLinkedListTests(const TestNumber& number, const Tes
     append<HeapAllocationErrorsTest>("insertAfter test 1", InsertAfterTest1);
     append<HeapAllocationErrorsTest>("insertBefore test 1", InsertBeforeTest1);
     append<HeapAllocationErrorsTest>("insertBefore test 2", InsertBeforeTest2);
+    append<HeapAllocationErrorsTest>("traverse test 1", TraverseTest1);
+    append<HeapAllocationErrorsTest>("traverse test 2", TraverseTest2);
+    append<HeapAllocationErrorsTest>("traverse test 3", TraverseTest3);
 }
 
 void DoublyLinkedListTests::ConstructorTest1(Test& test)
@@ -152,5 +155,60 @@ void DoublyLinkedListTests::InsertBeforeTest2(Test& test)
     ISHIKO_TEST_FAIL_IF_NEQ(head_node->nextNode(), nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(head_node->data(), 5);
 
+    ISHIKO_TEST_PASS();
+}
+
+void DoublyLinkedListTests::TraverseTest1(Test& test)
+{
+    DoublyLinkedList<int> list;
+
+    size_t called = 0;
+
+    list.traverse(
+        [&called](int data)
+        {
+            ++called;
+        }
+    );
+
+    ISHIKO_TEST_FAIL_IF_NEQ(called, 0);
+    ISHIKO_TEST_PASS();
+}
+
+void DoublyLinkedListTests::TraverseTest2(Test& test)
+{
+    DoublyLinkedList<int> list;
+    list.setHead(5);
+
+    std::vector<int> output;
+
+    list.traverse(
+        [&output](int data)
+        {
+            output.push_back(data);
+        }
+    );
+
+    ISHIKO_TEST_FAIL_IF_NEQ(output, std::vector<int>({5}));
+    ISHIKO_TEST_PASS();
+}
+
+void DoublyLinkedListTests::TraverseTest3(Test& test)
+{
+    DoublyLinkedList<int> list;
+    list.setHead(5);
+    list.insertAfter(9, list.head());
+    list.insertAfter(7, list.head());
+
+    std::vector<int> output;
+
+    list.traverse(
+        [&output](int data)
+        {
+            output.push_back(data);
+        }
+    );
+
+    ISHIKO_TEST_FAIL_IF_NEQ(output, std::vector<int>({5, 7, 9}));
     ISHIKO_TEST_PASS();
 }

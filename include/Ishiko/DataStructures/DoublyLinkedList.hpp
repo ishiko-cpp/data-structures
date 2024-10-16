@@ -42,6 +42,9 @@ namespace Ishiko
         Node* head();
         Node* head(Error& error) noexcept;
 
+        template<typename Callable>
+        void traverse(Callable&& callable) const;
+
         void setHead(const DataType& data);
         void setHead(const DataType& data, Error& error) noexcept;
         Node* insertAfter(const DataType& data, Node* previous_node);
@@ -149,6 +152,17 @@ typename Ishiko::DoublyLinkedList<DataType>::Node* Ishiko::DoublyLinkedList<Data
     return m_head;
 }
 
+template<typename DataType>
+template<typename Callable>
+void Ishiko::DoublyLinkedList<DataType>::traverse(Callable&& callable) const
+{
+    Node* current_node = m_head;
+    while (current_node)
+    {
+        callable(current_node->data());
+        current_node = current_node->nextNode();
+    }
+}
 
 template<typename DataType>
 void Ishiko::DoublyLinkedList<DataType>::setHead(const DataType& data)

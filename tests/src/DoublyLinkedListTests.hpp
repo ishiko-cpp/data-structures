@@ -18,6 +18,9 @@ private:
     static void InsertAfterTest1(Ishiko::Test& test);
     static void InsertBeforeTest1(Ishiko::Test& test);
     static void InsertBeforeTest2(Ishiko::Test& test);
+    static void TraverseTest1(Ishiko::Test& test);
+    static void TraverseTest2(Ishiko::Test& test);
+    static void TraverseTest3(Ishiko::Test& test);
 };
 
 #endif
