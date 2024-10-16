@@ -3,6 +3,7 @@
 
 #include "BinaryTreeTests.hpp"
 #include "RedBlackTreeTests.hpp"
+#include "SinglyLinkedListTests.hpp"
 #include "Ishiko/DataStructures/linkoptions.hpp"
 #include <Ishiko/TestFramework/Core.hpp>
 #include <exception>
@@ -20,6 +21,7 @@ int main(int argc, char* argv[])
         TestHarness the_test_harness("Ishiko/C++ DataStructures Library Tests", configuration);
 
         TestSequence& the_tests = the_test_harness.tests();
+        the_tests.append<SinglyLinkedListTests>();
         the_tests.append<BinaryTreeTests>();
         the_tests.append<RedBlackTreeTests>();
 
