@@ -26,6 +26,9 @@
     <ClInclude Include="..\..\include\Ishiko\DataStructures\DataStructuresErrorCategory.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\Ishiko\DataStructures\DoublyLinkedList.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\include\Ishiko\DataStructures\RedBlackTree.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
