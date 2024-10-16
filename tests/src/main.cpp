@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: BSL-1.0
 
 #include "BinaryTreeTests.hpp"
+#include "DoublyLinkedListTests.hpp"
 #include "RedBlackTreeTests.hpp"
 #include "SinglyLinkedListTests.hpp"
 #include "Ishiko/DataStructures/linkoptions.hpp"
@@ -22,6 +23,7 @@ int main(int argc, char* argv[])
 
         TestSequence& the_tests = the_test_harness.tests();
         the_tests.append<SinglyLinkedListTests>();
+        the_tests.append<DoublyLinkedListTests>();
         the_tests.append<BinaryTreeTests>();
         the_tests.append<RedBlackTreeTests>();
 

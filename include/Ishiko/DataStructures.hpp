@@ -6,6 +6,7 @@
 
 #include "DataStructures/BinaryTree.hpp"
 #include "DataStructures/DataStructuresErrorCategory.hpp"
+#include "DataStructures/DoublyLinkedList.hpp"
 #include "DataStructures/linkoptions.hpp"
 #include "DataStructures/SinglyLinkedList.hpp"
 
