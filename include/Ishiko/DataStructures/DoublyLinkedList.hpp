@@ -48,6 +48,7 @@ namespace Ishiko
 
     private:
         static void linkNodes(Node* start_node, Node* end_node) noexcept;
+
         Node* m_head = nullptr;
     };
 }
