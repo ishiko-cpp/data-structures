@@ -42,6 +42,7 @@ void DoublyLinkedListTests::SetHeadTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_ABORT_IF_EQ(node, nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(node->previousNode(), nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(node->nextNode(), nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(node->data(), 5);
     ISHIKO_TEST_PASS();
@@ -61,6 +62,7 @@ void DoublyLinkedListTests::SetHeadTest2(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_ABORT_IF_EQ(node, nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(node->previousNode(), nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(node->nextNode(), nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(node->data(), 5);
     ISHIKO_TEST_PASS();
@@ -80,7 +82,9 @@ void DoublyLinkedListTests::InsertAfterTest1(Test& test)
     DoublyLinkedList<int>::Node* next_node = list.insertAfter(3, head_node);
 
     ISHIKO_TEST_ABORT_IF_EQ(next_node, nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(head_node->previousNode(), nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(head_node->nextNode(), next_node);
+    ISHIKO_TEST_FAIL_IF_NEQ(next_node->previousNode(), head_node);
     ISHIKO_TEST_FAIL_IF_NEQ(next_node->nextNode(), nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(next_node->data(), 3);
     ISHIKO_TEST_PASS();
