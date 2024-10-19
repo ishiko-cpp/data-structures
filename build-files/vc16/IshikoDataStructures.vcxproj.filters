@@ -35,6 +35,9 @@
     <ClInclude Include="..\..\include\Ishiko\DataStructures\SinglyLinkedList.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\Ishiko\DataStructures\SinglyLinkedListBase.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\include\Ishiko\DataStructures\SkipList.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
