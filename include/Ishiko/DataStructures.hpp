@@ -9,5 +9,7 @@
 #include "DataStructures/DoublyLinkedList.hpp"
 #include "DataStructures/linkoptions.hpp"
 #include "DataStructures/SinglyLinkedList.hpp"
+#include "DataStructures/SinglyLinkedListBase.hpp"
+#include "DataStructures/Skiplist.hpp"
 
 #endif

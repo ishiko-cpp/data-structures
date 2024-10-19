@@ -5,6 +5,7 @@
 #define GUARD_ISHIKO_CPP_DATASTRUCTURES_SINGLYLINKEDLIST_HPP
 
 #include "DataStructuresErrorCategory.hpp"
+#include "SinglyLinkedListBase.hpp"
 #include <Ishiko/Errors.hpp>
 #include <Ishiko/Memory.hpp>
 
