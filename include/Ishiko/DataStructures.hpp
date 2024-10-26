@@ -6,8 +6,12 @@
 
 #include "DataStructures/BinaryTree.hpp"
 #include "DataStructures/DataStructuresErrorCategory.hpp"
+#include "DataStructures/DataTypeTraits.hpp"
 #include "DataStructures/DoublyLinkedList.hpp"
+#include "DataStructures/DynamicArray.hpp"
 #include "DataStructures/linkoptions.hpp"
 #include "DataStructures/SinglyLinkedList.hpp"
+#include "DataStructures/SinglyLinkedListBase.hpp"
+#include "DataStructures/Skiplist.hpp"
 
 #endif

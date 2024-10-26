@@ -3,6 +3,7 @@
 
 #include "BinaryTreeTests.hpp"
 #include "Ishiko/DataStructures/BinaryTree.hpp"
+#include <string>
 
 using namespace Ishiko;
 
@@ -10,8 +11,11 @@ BinaryTreeTests::BinaryTreeTests(const TestNumber& number, const TestContext& co
     : TestSequence(number, "BinaryTree tests", context)
 {
     append<HeapAllocationErrorsTest>("Constructor test 1", ConstructorTest1);
+    append<HeapAllocationErrorsTest>("Constructor test 2", ConstructorTest2);
     append<HeapAllocationErrorsTest>("setRoot test 1", SetRootTest1);
     append<HeapAllocationErrorsTest>("setRoot test 2", SetRootTest2);
+    append<HeapAllocationErrorsTest>("setRoot test 3", SetRootTest3);
+    append<HeapAllocationErrorsTest>("setRoot test 4", SetRootTest4);
     append<HeapAllocationErrorsTest>("insertLeft test 1", InsertLeftTest1);
     append<HeapAllocationErrorsTest>("insertLeft test 2", InsertLeftTest2);
     append<HeapAllocationErrorsTest>("insertRight test 1", InsertRightTest1);
@@ -33,6 +37,20 @@ void BinaryTreeTests::ConstructorTest1(Test& test)
 
     Error error;
     BinaryTree<int>::Node* node = tree.root(error);
+
+    ISHIKO_TEST_FAIL_IF_NOT(error);
+    ISHIKO_TEST_FAIL_IF_NEQ(node, nullptr);
+    ISHIKO_TEST_PASS();
+}
+
+void BinaryTreeTests::ConstructorTest2(Test& test)
+{
+    BinaryTree<std::string> tree;
+
+    ISHIKO_TEST_FAIL_IF_NOT(tree.isEmpty());
+
+    Error error;
+    BinaryTree<std::string>::Node* node = tree.root(error);
 
     ISHIKO_TEST_FAIL_IF_NOT(error);
     ISHIKO_TEST_FAIL_IF_NEQ(node, nullptr);
@@ -76,6 +94,46 @@ void BinaryTreeTests::SetRootTest2(Test& test)
     ISHIKO_TEST_FAIL_IF_NEQ(node->leftChildNode(), nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(node->rightChildNode(), nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(node->data(), 5);
+    ISHIKO_TEST_PASS();
+}
+
+void BinaryTreeTests::SetRootTest3(Test& test)
+{
+    BinaryTree<std::string> tree;
+    tree.setRoot("root");
+
+    ISHIKO_TEST_FAIL_IF(tree.isEmpty());
+
+    Error error;
+    BinaryTree<std::string>::Node* node = tree.root(error);
+
+    ISHIKO_TEST_FAIL_IF(error);
+    ISHIKO_TEST_ABORT_IF_EQ(node, nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(node->parentNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(node->leftChildNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(node->rightChildNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(node->data(), "root");
+    ISHIKO_TEST_PASS();
+}
+
+void BinaryTreeTests::SetRootTest4(Test& test)
+{
+    Error error;
+
+    BinaryTree<std::string> tree;
+    tree.setRoot("root", error);
+
+    ISHIKO_TEST_FAIL_IF(error);
+    ISHIKO_TEST_FAIL_IF(tree.isEmpty());
+
+    BinaryTree<std::string>::Node* node = tree.root(error);
+
+    ISHIKO_TEST_FAIL_IF(error);
+    ISHIKO_TEST_ABORT_IF_EQ(node, nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(node->parentNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(node->leftChildNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(node->rightChildNode(), nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(node->data(), "root");
     ISHIKO_TEST_PASS();
 }
 
