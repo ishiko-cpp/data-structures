@@ -5,13 +5,14 @@
 #define GUARD_ISHIKO_CPP_DATASTRUCTURES_SINGLYLINKEDLIST_HPP
 
 #include "DataStructuresErrorCategory.hpp"
+#include "DataTypeTraits.hpp"
 #include "SinglyLinkedListBase.hpp"
 #include <Ishiko/Errors.hpp>
 #include <Ishiko/Memory.hpp>
 
 namespace Ishiko
 {
-    template<typename DataType>
+    template<typename DataType, typename DataTypeTraits = DataTypeTraits<DataType>>
     class SinglyLinkedList
     {
     public:
@@ -19,6 +20,7 @@ namespace Ishiko
         {
         public:
             Node(const DataType& data);
+            Node(const DataType& data, Error& error) noexcept;
             ~Node() noexcept;
 
             const Node* nextNode() const noexcept;
@@ -34,11 +36,10 @@ namespace Ishiko
         };
 
         SinglyLinkedList() noexcept = default;
-        ~SinglyLinkedList() noexcept;
+        ~SinglyLinkedList() noexcept = default;
 
         bool isEmpty() const noexcept;
-        Node* head();
-        Node* head(Error& error) noexcept;
+        Node* head() noexcept;
 
         template<typename Callable>
         void traverse(Callable&& callable) const;
@@ -48,131 +49,118 @@ namespace Ishiko
         Node* insert(const DataType& data, Node* previous_node);
 
     private:
-        Node* m_head = nullptr;
+        SinglyLinkedListBase<Node> m_list_impl;
     };
 }
 
-template<typename DataType>
-Ishiko::SinglyLinkedList<DataType>::Node::Node(const DataType& data)
+template<typename DataType, typename DataTypeTraits>
+Ishiko::SinglyLinkedList<DataType, DataTypeTraits>::Node::Node(const DataType& data)
     : m_data(data)
 {
 }
 
-template<typename DataType>
-Ishiko::SinglyLinkedList<DataType>::Node::~Node() noexcept
+template<typename DataType, typename DataTypeTraits>
+Ishiko::SinglyLinkedList<DataType, DataTypeTraits>::Node::Node(const DataType& data, Error& error) noexcept
+    : m_data(DataTypeTraits::Copy(data, error))
+{
+}
+
+template<typename DataType, typename DataTypeTraits>
+Ishiko::SinglyLinkedList<DataType, DataTypeTraits>::Node::~Node() noexcept
 {
     delete m_next_node;
 }
 
-template<typename DataType>
-const typename Ishiko::SinglyLinkedList<DataType>::Node*
-Ishiko::SinglyLinkedList<DataType>::Node::nextNode() const noexcept
+template<typename DataType, typename DataTypeTraits>
+const typename Ishiko::SinglyLinkedList<DataType, DataTypeTraits>::Node*
+Ishiko::SinglyLinkedList<DataType, DataTypeTraits>::Node::nextNode() const noexcept
 {
     return m_next_node;
 }
 
-template<typename DataType>
-typename Ishiko::SinglyLinkedList<DataType>::Node* Ishiko::SinglyLinkedList<DataType>::Node::nextNode() noexcept
+template<typename DataType, typename DataTypeTraits>
+typename Ishiko::SinglyLinkedList<DataType, DataTypeTraits>::Node*
+Ishiko::SinglyLinkedList<DataType, DataTypeTraits>::Node::nextNode() noexcept
 {
     return m_next_node;
 }
 
-template<typename DataType>
-void Ishiko::SinglyLinkedList<DataType>::Node::setNextNode(Node* node) noexcept
+template<typename DataType, typename DataTypeTraits>
+void Ishiko::SinglyLinkedList<DataType, DataTypeTraits>::Node::setNextNode(Node* node) noexcept
 {
     m_next_node = node;
 }
 
-template<typename DataType>
-const DataType& Ishiko::SinglyLinkedList<DataType>::Node::data() const noexcept
+template<typename DataType, typename DataTypeTraits>
+const DataType& Ishiko::SinglyLinkedList<DataType, DataTypeTraits>::Node::data() const noexcept
 {
     return m_data;
 }
 
-template<typename DataType>
-DataType& Ishiko::SinglyLinkedList<DataType>::Node::data() noexcept
+template<typename DataType, typename DataTypeTraits>
+DataType& Ishiko::SinglyLinkedList<DataType, DataTypeTraits>::Node::data() noexcept
 {
     return m_data;
 }
 
-template<typename DataType>
-Ishiko::SinglyLinkedList<DataType>::~SinglyLinkedList() noexcept
+template<typename DataType, typename DataTypeTraits>
+bool Ishiko::SinglyLinkedList<DataType, DataTypeTraits>::isEmpty() const noexcept
 {
-    delete m_head;
+    return m_list_impl.isEmpty();
 }
 
-template<typename DataType>
-bool Ishiko::SinglyLinkedList<DataType>::isEmpty() const noexcept
+template<typename DataType, typename DataTypeTraits>
+typename Ishiko::SinglyLinkedList<DataType, DataTypeTraits>::Node*
+Ishiko::SinglyLinkedList<DataType, DataTypeTraits>::head() noexcept
 {
-    return (m_head == nullptr);
+    return m_list_impl.head();
 }
 
-template<typename DataType>
-typename Ishiko::SinglyLinkedList<DataType>::Node* Ishiko::SinglyLinkedList<DataType>::head()
-{
-    if (m_head == nullptr)
-    {
-        Throw(DataStructuresErrorCategory::Value::node_does_not_exist, "Linked list is empty", __FILE__, __LINE__);
-    }
-    return m_head;
-}
-
-template<typename DataType>
-typename Ishiko::SinglyLinkedList<DataType>::Node* Ishiko::SinglyLinkedList<DataType>::head(Error& error) noexcept
-{
-    if (m_head == nullptr)
-    {
-        Fail(DataStructuresErrorCategory::Value::node_does_not_exist, "Linked list is empty", __FILE__, __LINE__,
-            error);
-    }
-    return m_head;
-}
-
-template<typename DataType>
+template<typename DataType, typename DataTypeTraits>
 template<typename Callable>
-void Ishiko::SinglyLinkedList<DataType>::traverse(Callable&& callable) const
+void Ishiko::SinglyLinkedList<DataType, DataTypeTraits>::traverse(Callable&& callable) const
 {
-    Node* current_node = m_head;
-    while (current_node)
-    {
-        callable(current_node->data());
-        current_node = current_node->nextNode();
-    }
+    m_list_impl.traverse(std::forward<Callable>(callable));
 }
 
-template<typename DataType>
-void Ishiko::SinglyLinkedList<DataType>::setHead(const DataType& data)
+template<typename DataType, typename DataTypeTraits>
+void Ishiko::SinglyLinkedList<DataType, DataTypeTraits>::setHead(const DataType& data)
 {
-    if (m_head == nullptr)
+    Node* head = m_list_impl.head();
+    if (head)
     {
-        m_head = new Node(data);
+        head->data() = data;
     }
     else
     {
-        m_head->data() = data;
+        m_list_impl.setHead(new Node(data));
     }
 }
 
-template<typename DataType>
-void Ishiko::SinglyLinkedList<DataType>::setHead(const DataType& data, Error& error) noexcept
+template<typename DataType, typename DataTypeTraits>
+void Ishiko::SinglyLinkedList<DataType, DataTypeTraits>::setHead(const DataType& data, Error& error) noexcept
 {
-    if (m_head == nullptr)
+    Node* head = m_list_impl.head();
+    if (head)
     {
-        m_head = NewObject<Node>(error, data);
+        head->data() = data;
     }
     else
     {
-        m_head->data() = data;
+        Node* new_head = NewObject<Node>(error, data, error);
+        if (!error)
+        {
+            m_list_impl.setHead(new_head);
+        }
     }
 }
 
-template<typename DataType>
-typename Ishiko::SinglyLinkedList<DataType>::Node* Ishiko::SinglyLinkedList<DataType>::insert(const DataType& data,
-    Node* previous_node)
+template<typename DataType, typename DataTypeTraits>
+typename Ishiko::SinglyLinkedList<DataType, DataTypeTraits>::Node*
+Ishiko::SinglyLinkedList<DataType, DataTypeTraits>::insert(const DataType& data, Node* previous_node)
 {
     Node* new_node = new Node(data);
-    new_node->setNextNode(previous_node->nextNode());
-    previous_node->setNextNode(new_node);
+    m_list_impl.insert(new_node, previous_node);
     return new_node;
 }
 
