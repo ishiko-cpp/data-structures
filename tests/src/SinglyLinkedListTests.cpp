@@ -24,10 +24,8 @@ void SinglyLinkedListTests::ConstructorTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF_NOT(list.isEmpty());
 
-    Error error;
-    SinglyLinkedList<int>::Node* node = list.head(error);
+    SinglyLinkedList<int>::Node* node = list.head();
 
-    ISHIKO_TEST_FAIL_IF_NOT(error);
     ISHIKO_TEST_FAIL_IF_NEQ(node, nullptr);
 
     ISHIKO_TEST_PASS();
@@ -40,10 +38,8 @@ void SinglyLinkedListTests::SetHeadTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(list.isEmpty());
 
-    Error error;
-    SinglyLinkedList<int>::Node* node = list.head(error);
+    SinglyLinkedList<int>::Node* node = list.head();
 
-    ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_ABORT_IF_EQ(node, nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(node->nextNode(), nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(node->data(), 5);
@@ -60,9 +56,8 @@ void SinglyLinkedListTests::SetHeadTest2(Test& test)
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF(list.isEmpty());
 
-    SinglyLinkedList<int>::Node* node = list.head(error);
+    SinglyLinkedList<int>::Node* node = list.head();
 
-    ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_ABORT_IF_EQ(node, nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(node->nextNode(), nullptr);
     ISHIKO_TEST_FAIL_IF_NEQ(node->data(), 5);
@@ -74,10 +69,8 @@ void SinglyLinkedListTests::InsertTest1(Test& test)
     SinglyLinkedList<int> list;
     list.setHead(5);
 
-    Error error;
-    SinglyLinkedList<int>::Node* head_node = list.head(error);
+    SinglyLinkedList<int>::Node* head_node = list.head();
 
-    ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_ABORT_IF_EQ(head_node, nullptr);
 
     SinglyLinkedList<int>::Node* next_node = list.insert(3, head_node);

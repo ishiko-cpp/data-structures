@@ -5,11 +5,12 @@
 #define GUARD_ISHIKO_CPP_DATASTRUCTURES_DOUBLYLINKEDLIST_HPP
 
 #include "DataStructuresErrorCategory.hpp"
+#include "DataTypeTraits.hpp"
 #include <Ishiko/Errors.hpp>
 
 namespace Ishiko
 {
-    template<typename DataType>
+    template<typename DataType, typename DataTypeTraits = DataTypeTraits<DataType>>
     class DoublyLinkedList
     {
     public:
@@ -17,6 +18,7 @@ namespace Ishiko
         {
         public:
             Node(const DataType& data);
+            Node(const DataType& data, Error& error) noexcept;
             ~Node() noexcept;
 
             const Node* previousNode() const noexcept;
@@ -57,82 +59,91 @@ namespace Ishiko
     };
 }
 
-template<typename DataType>
-Ishiko::DoublyLinkedList<DataType>::Node::Node(const DataType& data)
+template<typename DataType, typename DataTypeTraits>
+Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::Node::Node(const DataType& data)
     : m_data(data)
 {
 }
 
-template<typename DataType>
-Ishiko::DoublyLinkedList<DataType>::Node::~Node() noexcept
+template<typename DataType, typename DataTypeTraits>
+Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::Node::Node(const DataType& data, Error& error) noexcept
+    : m_data(DataTypeTraits::Copy(data, error))
+{
+}
+
+template<typename DataType, typename DataTypeTraits>
+Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::Node::~Node() noexcept
 {
     delete m_next_node;
 }
 
-template<typename DataType>
-const typename Ishiko::DoublyLinkedList<DataType>::Node*
-Ishiko::DoublyLinkedList<DataType>::Node::previousNode() const noexcept
+template<typename DataType, typename DataTypeTraits>
+const typename Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::Node*
+Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::Node::previousNode() const noexcept
 {
     return m_previous_node;
 }
 
-template<typename DataType>
-typename Ishiko::DoublyLinkedList<DataType>::Node* Ishiko::DoublyLinkedList<DataType>::Node::previousNode() noexcept
+template<typename DataType, typename DataTypeTraits>
+typename Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::Node*
+Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::Node::previousNode() noexcept
 {
     return m_previous_node;
 }
 
-template<typename DataType>
-void Ishiko::DoublyLinkedList<DataType>::Node::setPreviousNode(Node* node) noexcept
+template<typename DataType, typename DataTypeTraits>
+void Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::Node::setPreviousNode(Node* node) noexcept
 {
     m_previous_node = node;
 }
 
-template<typename DataType>
-const typename Ishiko::DoublyLinkedList<DataType>::Node*
-Ishiko::DoublyLinkedList<DataType>::Node::nextNode() const noexcept
+template<typename DataType, typename DataTypeTraits>
+const typename Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::Node*
+Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::Node::nextNode() const noexcept
 {
     return m_next_node;
 }
 
-template<typename DataType>
-typename Ishiko::DoublyLinkedList<DataType>::Node* Ishiko::DoublyLinkedList<DataType>::Node::nextNode() noexcept
+template<typename DataType, typename DataTypeTraits>
+typename Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::Node*
+Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::Node::nextNode() noexcept
 {
     return m_next_node;
 }
 
-template<typename DataType>
-void Ishiko::DoublyLinkedList<DataType>::Node::setNextNode(Node* node) noexcept
+template<typename DataType, typename DataTypeTraits>
+void Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::Node::setNextNode(Node* node) noexcept
 {
     m_next_node = node;
 }
 
-template<typename DataType>
-const DataType& Ishiko::DoublyLinkedList<DataType>::Node::data() const noexcept
+template<typename DataType, typename DataTypeTraits>
+const DataType& Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::Node::data() const noexcept
 {
     return m_data;
 }
 
-template<typename DataType>
-DataType& Ishiko::DoublyLinkedList<DataType>::Node::data() noexcept
+template<typename DataType, typename DataTypeTraits>
+DataType& Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::Node::data() noexcept
 {
     return m_data;
 }
 
-template<typename DataType>
-Ishiko::DoublyLinkedList<DataType>::~DoublyLinkedList() noexcept
+template<typename DataType, typename DataTypeTraits>
+Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::~DoublyLinkedList() noexcept
 {
     delete m_head;
 }
 
-template<typename DataType>
-bool Ishiko::DoublyLinkedList<DataType>::isEmpty() const noexcept
+template<typename DataType, typename DataTypeTraits>
+bool Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::isEmpty() const noexcept
 {
     return (m_head == nullptr);
 }
 
-template<typename DataType>
-typename Ishiko::DoublyLinkedList<DataType>::Node* Ishiko::DoublyLinkedList<DataType>::head()
+template<typename DataType, typename DataTypeTraits>
+typename Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::Node*
+Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::head()
 {
     if (m_head == nullptr)
     {
@@ -141,8 +152,9 @@ typename Ishiko::DoublyLinkedList<DataType>::Node* Ishiko::DoublyLinkedList<Data
     return m_head;
 }
 
-template<typename DataType>
-typename Ishiko::DoublyLinkedList<DataType>::Node* Ishiko::DoublyLinkedList<DataType>::head(Error& error) noexcept
+template<typename DataType, typename DataTypeTraits>
+typename Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::Node*
+Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::head(Error& error) noexcept
 {
     if (m_head == nullptr)
     {
@@ -152,9 +164,9 @@ typename Ishiko::DoublyLinkedList<DataType>::Node* Ishiko::DoublyLinkedList<Data
     return m_head;
 }
 
-template<typename DataType>
+template<typename DataType, typename DataTypeTraits>
 template<typename Callable>
-void Ishiko::DoublyLinkedList<DataType>::traverse(Callable&& callable) const
+void Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::traverse(Callable&& callable) const
 {
     Node* current_node = m_head;
     while (current_node)
@@ -164,8 +176,8 @@ void Ishiko::DoublyLinkedList<DataType>::traverse(Callable&& callable) const
     }
 }
 
-template<typename DataType>
-void Ishiko::DoublyLinkedList<DataType>::setHead(const DataType& data)
+template<typename DataType, typename DataTypeTraits>
+void Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::setHead(const DataType& data)
 {
     if (m_head == nullptr)
     {
@@ -177,12 +189,12 @@ void Ishiko::DoublyLinkedList<DataType>::setHead(const DataType& data)
     }
 }
 
-template<typename DataType>
-void Ishiko::DoublyLinkedList<DataType>::setHead(const DataType& data, Error& error) noexcept
+template<typename DataType, typename DataTypeTraits>
+void Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::setHead(const DataType& data, Error& error) noexcept
 {
     if (m_head == nullptr)
     {
-        m_head = NewObject<Node>(error, data);
+        m_head = NewObject<Node>(error, data, error);
     }
     else
     {
@@ -190,9 +202,9 @@ void Ishiko::DoublyLinkedList<DataType>::setHead(const DataType& data, Error& er
     }
 }
 
-template<typename DataType>
-typename Ishiko::DoublyLinkedList<DataType>::Node*
-Ishiko::DoublyLinkedList<DataType>::insertAfter(const DataType& data, Node* previous_node)
+template<typename DataType, typename DataTypeTraits>
+typename Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::Node*
+Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::insertAfter(const DataType& data, Node* previous_node)
 {
     Node* new_node = new Node(data);
     Node* next_node = previous_node->nextNode();
@@ -204,9 +216,9 @@ Ishiko::DoublyLinkedList<DataType>::insertAfter(const DataType& data, Node* prev
     return new_node;
 }
 
-template<typename DataType>
-typename Ishiko::DoublyLinkedList<DataType>::Node*
-Ishiko::DoublyLinkedList<DataType>::insertBefore(const DataType& data, Node* next_node)
+template<typename DataType, typename DataTypeTraits>
+typename Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::Node*
+Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::insertBefore(const DataType& data, Node* next_node)
 {
     Node* new_node = new Node(data);
     Node* previous_node = next_node->previousNode();
@@ -222,8 +234,8 @@ Ishiko::DoublyLinkedList<DataType>::insertBefore(const DataType& data, Node* nex
     return new_node;
 }
 
-template<typename DataType>
-void Ishiko::DoublyLinkedList<DataType>::linkNodes(Node* start_node, Node* end_node) noexcept
+template<typename DataType, typename DataTypeTraits>
+void Ishiko::DoublyLinkedList<DataType, DataTypeTraits>::linkNodes(Node* start_node, Node* end_node) noexcept
 {
     start_node->setNextNode(end_node);
     end_node->setPreviousNode(start_node);
