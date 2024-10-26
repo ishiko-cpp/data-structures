@@ -5,6 +5,7 @@
 #include "DoublyLinkedListTests.hpp"
 #include "RedBlackTreeTests.hpp"
 #include "SinglyLinkedListTests.hpp"
+#include "SkipListTests.hpp"
 #include "Ishiko/DataStructures/linkoptions.hpp"
 #include <Ishiko/TestFramework/Core.hpp>
 #include <exception>
@@ -24,6 +25,7 @@ int main(int argc, char* argv[])
         TestSequence& the_tests = the_test_harness.tests();
         the_tests.append<SinglyLinkedListTests>();
         the_tests.append<DoublyLinkedListTests>();
+        the_tests.append<SkipListTests>();
         the_tests.append<BinaryTreeTests>();
         the_tests.append<RedBlackTreeTests>();
 
