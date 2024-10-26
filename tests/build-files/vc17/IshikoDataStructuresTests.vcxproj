@@ -161,12 +161,14 @@
     <ClCompile Include="..\..\src\DoublyLinkedListTests.cpp" />
     <ClCompile Include="..\..\src\RedBlackTreeTests.cpp" />
     <ClCompile Include="..\..\src\SinglyLinkedListTests.cpp" />
+    <ClCompile Include="..\..\src\SkipListTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\BinaryTreeTests.hpp" />
     <ClInclude Include="..\..\src\DoublyLinkedListTests.hpp" />
     <ClInclude Include="..\..\src\RedBlackTreeTests.hpp" />
     <ClInclude Include="..\..\src\SinglyLinkedListTests.hpp" />
+    <ClInclude Include="..\..\src\SkipListTests.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

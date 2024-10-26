@@ -27,6 +27,7 @@ program IshikoDataStructuresTests : IshikoTestFrameworkCore, IshikoDataStructure
         ../../src/DoublyLinkedListTests.hpp
         ../../src/RedBlackTreeTests.hpp
         ../../src/SinglyLinkedListTests.hpp
+        ../../src/SkipListTests.hpp
     }
 
     sources
@@ -36,5 +37,6 @@ program IshikoDataStructuresTests : IshikoTestFrameworkCore, IshikoDataStructure
         ../../src/DoublyLinkedListTests.cpp
         ../../src/RedBlackTreeTests.cpp
         ../../src/SinglyLinkedListTests.cpp
+        ../../src/SkipListTests.cpp
     }
 }

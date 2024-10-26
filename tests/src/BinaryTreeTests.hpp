@@ -13,8 +13,11 @@ public:
 
 private:
     static void ConstructorTest1(Ishiko::Test& test);
+    static void ConstructorTest2(Ishiko::Test& test);
     static void SetRootTest1(Ishiko::Test& test);
     static void SetRootTest2(Ishiko::Test& test);
+    static void SetRootTest3(Ishiko::Test& test);
+    static void SetRootTest4(Ishiko::Test& test);
     static void InsertLeftTest1(Ishiko::Test& test);
     static void InsertLeftTest2(Ishiko::Test& test);
     static void InsertRightTest1(Ishiko::Test& test);
