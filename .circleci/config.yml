@@ -71,7 +71,6 @@ jobs:
       - store_test_results:
           name: Upload test results to CircleCI
           path: /workspace/build/test-results/IshikoDataStructures.xml
-
 workflows:
   version: 2
   continuous_build:
