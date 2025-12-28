@@ -20,6 +20,11 @@ program IshikoDataStructuresTests : IshikoTestFrameworkCore, IshikoDataStructure
         libs += IshikoTestFrameworkCore IshikoConfiguration IshikoXML IshikoFileSystem IshikoIO IshikoProcess IshikoTime IshikoText IshikoDataStructures IshikoMemory IshikoErrors IshikoBasePlatform;
         libs += fmt boost_filesystem;
     }
+    
+    if ($(toolset) != gnu)
+    {
+        cxx-compiler-options = "/utf-8";
+    }
 
     headers
     {
