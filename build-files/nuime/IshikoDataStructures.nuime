@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="https://nuime.org/schema/core/1">
-  <name>data-structures</name>
+  <name>IshikoDataStructures</name>
   <targets>
     <target>
-      <name>data-structures-lib</name>
+      <name>lib</name>
       <labels>
         <label>nuime:product</label>
       </labels>
       <build-dependencies>
         <dependency>
-          <name>memory</name>
+          <name>IshikoMemory</name>
           <target-refs>
             <target-ref>
               <location>
-                <url>https://github.com/ishiko-cpp/memory/build-files/nuime/memory.nuime</url>
+                <url>https://github.com/ishiko-cpp/memory/build-files/nuime/IshikoMemory.nuime</url>
               </location>
-              <name>memory-lib</name>
+              <name>lib</name>
             </target-ref>
           </target-refs>
         </dependency>
         <dependency>
-          <name>errors</name>
+          <name>IshikoErrors</name>
           <target-refs>
             <target-ref>
               <location>
-                <url>https://github.com/ishiko-cpp/errors/build-files/nuime/errors.nuime</url>
+                <url>https://github.com/ishiko-cpp/errors/build-files/nuime/IshikoErrors.nuime</url>
               </location>
-              <name>errors-lib</name>
+              <name>lib</name>
             </target-ref>
           </target-refs>
         </dependency>
@@ -35,9 +35,9 @@
         <property name="nuime:test-suite">
           <target-ref>
             <location>
-              <url>https://github.com/ishiko-cpp/data-structures/tests/build-files/nuime/data-structures-tests.nuime</url>
+              <url>https://github.com/ishiko-cpp/data-structures/tests/build-files/nuime/IshikoDataStructuresTests.nuime</url>
             </location>
-            <name>data-structures-tests</name>
+            <name>tests</name>
           </target-ref>
         </property>
       </properties>
@@ -45,12 +45,12 @@
   </targets>
   <subprojects>
     <subproject>
-      <name>data-structures-tests</name>
+      <name>IshikoDataStructuresTests</name>
       <labels>
         <label>nuime:tests</label>
       </labels>
       <location>
-        <url>https://github.com/ishiko-cpp/data-structures/tests/build-files/nuime/data-structures-tests.nuime</url>
+        <url>https://github.com/ishiko-cpp/data-structures/tests/build-files/nuime/IshikoDataStructuresTests.nuime</url>
       </location>
     </subproject>
   </subprojects>
